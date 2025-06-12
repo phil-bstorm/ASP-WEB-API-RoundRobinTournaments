@@ -1,24 +1,6 @@
 services: 
-#    Not working yet
-    api-dev:
-        container_name: PokemonBattleAPI
-        image: mcr.microsoft.com/dotnet/sdk:8.0
-        command: bash -c "dotnet restore && dotnet watch run -e RESTART_PROMPT=never"
-        working_dir:
-            /app/PokemonBattleAPI
-        ports:
-            - "5239:5239"
-        volumes:
-            - ../:/app
-        environment:
-            - ASPNETCORE_ENVIRONMENT=Development
-        depends_on:
-            - sqlserver
-        networks:
-            - db-network
-
     sqlserver:
-        container_name: PokemonBattleAPI-SQLServer
+        container_name: RoundRobinTournament-SQLServer
         build:
             dockerfile: sqlserver-fulltext.Dockerfile
         ports:
@@ -39,5 +21,5 @@ networks:
         driver: bridge
 
 
-# docker-compose -p pokemon_battle_api up -d
-# docker-compose -p pokemon_battle_api down
+# docker-compose -p round_robin_tournament up -d
+# docker-compose -p round_robin_tournament down

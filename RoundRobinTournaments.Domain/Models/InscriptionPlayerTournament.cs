@@ -2,9 +2,12 @@
 {
 	public class InscriptionPlayerTournament
 	{
+		public int PlayerId { get; set; }
+		public int TournamentId { get; set; }
+
 		public Utilisateur Player { get; set; }
 		public Tournament Tournament { get; set; }
 		public DateTime InscriptionDate { get; set; } = DateTime.Now;
-		public DateTime? Canceled_at { get; set; } = null;
+		public DateTime? CanceledAt { get; set; } = null;
 	}
 }
