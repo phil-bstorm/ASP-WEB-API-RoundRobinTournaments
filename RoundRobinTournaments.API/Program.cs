@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RoundRobinTournaments.API.Middlewares;
 using RoundRobinTournaments.API.Services;
 using RoundRobinTournaments.BLL.Services;
 using RoundRobinTournaments.BLL.Services.Interfaces;
@@ -111,6 +112,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>(); // Register exception middleware
 
 app.UseAuthentication();
 app.UseAuthorization();

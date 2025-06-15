@@ -102,7 +102,7 @@ namespace RoundRobinTournaments.BLL.Services
 
 			if (utilisateur is null || !Argon2.Verify(utilisateur.Password, password))
 			{
-				throw new UsernameOrPasswordInvalidException();
+				throw new InvalidLoginException();
 			}
 
 			return utilisateur;
