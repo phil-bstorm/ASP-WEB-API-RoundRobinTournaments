@@ -25,6 +25,11 @@ namespace RoundRobinTournaments.API.DTOs
 		public required string Password { get; set; }
 	}
 
+	public class UpdateAvatarDTO
+	{
+		public IFormFile Image { get; set; } = null;
+	}
+
 	public class UtilisateurListDTO
 	{
 		public required int Id { get; set; }

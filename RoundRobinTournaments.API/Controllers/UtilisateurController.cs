@@ -130,10 +130,109 @@ namespace RoundRobinTournaments.API.Controllers
 				return BadRequest();
 			}
 
-			Utilisateur updateUser = _utilisateurService.GetById(id);
-			updateUser.Password = updatePasswordForm.Password;
+			_utilisateurService.UpdatePassword(id, updatePasswordForm.Password);
 
-			_utilisateurService.Update(updateUser);
+			return NoContent();
+		}
+
+		[HttpPatch("avatar", Name = "Update avatar")]
+		[Authorize]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+		public async Task<ActionResult> UpdateAvatar([FromForm] UpdateAvatarDTO dto)
+		{
+			if (int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int requestUserId))
+			{
+				// check the file
+				if (dto == null)
+				{
+					return BadRequest();
+				}
+
+				if (dto.Image == null || dto.Image.Length == 0)
+				{
+					return BadRequest("No file provided or file is empty.");
+				}
+
+				string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+				string extension = Path.GetExtension(dto.Image.FileName).ToLowerInvariant();
+
+				if (!allowedExtensions.Contains(extension))
+				{
+					return BadRequest("Extension de fichier non autorisée.");
+				}
+
+				string fileName = $"avatar_{requestUserId}{extension}";
+
+				// Sauvegarder le chemin de l'avatar dans la base de données
+				_utilisateurService.UpdateAvatar(requestUserId, $"/avatars/{fileName}");
+
+				string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "avatars");
+
+				if (!Directory.Exists(folderPath))
+				{
+					Directory.CreateDirectory(folderPath);
+				}
+
+				string filePath = Path.Combine(folderPath, fileName);
+				using (FileStream stream = new FileStream(filePath, FileMode.Create))
+				{
+					await dto.Image.CopyToAsync(stream);
+				}
+
+				return NoContent();
+			}
+			return Unauthorized();
+		}
+
+		[HttpPatch("avatar/{id}", Name = "Update avatar of other user")]
+		[Authorize(Roles = nameof(UtilisateurRole.Admin))]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+		public async Task<ActionResult> UpdateAvatar([FromRoute] int id, [FromForm] UpdateAvatarDTO dto)
+		{
+
+			// check the file
+			if (dto == null)
+			{
+				return BadRequest();
+			}
+
+			if (dto.Image == null || dto.Image.Length == 0)
+			{
+				return BadRequest("No file provided or file is empty.");
+			}
+
+			string[] allowedExtensions = { ".jpg", ".jpeg", ".png" };
+			string extension = Path.GetExtension(dto.Image.FileName).ToLowerInvariant();
+
+			if (!allowedExtensions.Contains(extension))
+			{
+				return BadRequest("Extension de fichier non autorisée.");
+			}
+			
+			string fileName = $"avatar_{id}{extension}";
+
+			// Sauvegarder le chemin de l'avatar dans la base de données
+			_utilisateurService.UpdateAvatar(id, $"/avatars/{fileName}");
+
+			string folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "avatars");
+
+			if (!Directory.Exists(folderPath))
+			{
+				Directory.CreateDirectory(folderPath);
+			}
+
+			string filePath = Path.Combine(folderPath, fileName);
+			using (FileStream stream = new FileStream(filePath, FileMode.Create))
+			{
+				await dto.Image.CopyToAsync(stream);
+			}
+
 			return NoContent();
 		}
 	}

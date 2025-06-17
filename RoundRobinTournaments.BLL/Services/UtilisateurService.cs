@@ -148,5 +148,18 @@ namespace RoundRobinTournaments.BLL.Services
 			_utilisateurRepository.Update(utilisateur);
 			return true;
 		}
+
+		public bool UpdateAvatar(int id, string newAvatarUrl) {
+			Utilisateur? utilisateur = _utilisateurRepository.GetById(id);
+			if (utilisateur == null)
+			{
+				throw new NotFoundException();
+			}
+
+			utilisateur.AvatarUrl = newAvatarUrl;
+
+			_utilisateurRepository.Update(utilisateur);
+			return true;
+		}
 	}
 }

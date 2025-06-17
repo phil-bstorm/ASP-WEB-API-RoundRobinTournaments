@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 # Env variables
 appsettings.Development.json
+
+# wwwroot images
+RoundRobinTournaments.API/wwwroot/avatars/*

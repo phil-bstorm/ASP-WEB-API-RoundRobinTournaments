@@ -119,9 +119,12 @@ if (app.Environment.IsDevelopment())
 	app.UseSwaggerUI();
 }
 
+
 app.UseIpRateLimiting();
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseMiddleware<ExceptionMiddleware>(); // Register exception middleware
 
