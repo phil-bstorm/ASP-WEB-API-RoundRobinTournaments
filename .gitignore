@@ -366,4 +366,4 @@ FodyWeavers.xsd
 appsettings.Development.json
 
 # wwwroot images
-RoundRobinTournaments.API/wwwroot/avatars/*
+Checkmate.API/wwwroot/avatars/*

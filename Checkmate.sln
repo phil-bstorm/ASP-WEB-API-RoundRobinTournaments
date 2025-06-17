@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36203.30
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dev", "Dev", "{50F805F0-7958-4F00-B947-EF339551AB4D}"
+	ProjectSection(SolutionItems) = preProject
+		DEV\History.md = DEV\History.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{7F940F58-D156-4AB1-A1FB-33BA3878DE3B}"
+	ProjectSection(SolutionItems) = preProject
+		Docker\docker-compose.yml = Docker\docker-compose.yml
+		Docker\sqlserver-fulltext.Dockerfile = Docker\sqlserver-fulltext.Dockerfile
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkmate.API", "Checkmate.API\Checkmate.API.csproj", "{1FAE72A4-9665-6712-5BEE-732608D02F96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkmate.BLL", "Checkmate.BLL\Checkmate.BLL.csproj", "{A995F7E2-C7BE-7B0C-33CD-616E61D673A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkmate.DAL", "Checkmate.DAL\Checkmate.DAL.csproj", "{E41D073F-0532-FA49-DAC5-12BD7682657A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Checkmate.Domain", "Checkmate.Domain\Checkmate.Domain.csproj", "{D17FBB2C-9635-3B28-61F4-8319B7F06E89}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FAE72A4-9665-6712-5BEE-732608D02F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAE72A4-9665-6712-5BEE-732608D02F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAE72A4-9665-6712-5BEE-732608D02F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAE72A4-9665-6712-5BEE-732608D02F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A995F7E2-C7BE-7B0C-33CD-616E61D673A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A995F7E2-C7BE-7B0C-33CD-616E61D673A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A995F7E2-C7BE-7B0C-33CD-616E61D673A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A995F7E2-C7BE-7B0C-33CD-616E61D673A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E41D073F-0532-FA49-DAC5-12BD7682657A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E41D073F-0532-FA49-DAC5-12BD7682657A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E41D073F-0532-FA49-DAC5-12BD7682657A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E41D073F-0532-FA49-DAC5-12BD7682657A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D17FBB2C-9635-3B28-61F4-8319B7F06E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D17FBB2C-9635-3B28-61F4-8319B7F06E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D17FBB2C-9635-3B28-61F4-8319B7F06E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D17FBB2C-9635-3B28-61F4-8319B7F06E89}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{50F805F0-7958-4F00-B947-EF339551AB4D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7F940F58-D156-4AB1-A1FB-33BA3878DE3B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7DDF17E7-B15A-42C7-B1C9-EDB2FCA73492}
+	EndGlobalSection
+EndGlobal
