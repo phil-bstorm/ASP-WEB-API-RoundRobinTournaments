@@ -12,7 +12,7 @@ namespace RoundRobinTournaments.API.Mappers
 				Username = dto.Username,
 				Elo = dto.Elo,
 				BirhDate = dto.birhtDate,
-				Password = "" // can't be changed from Update route
+				Password = null // can't be changed from Update route
 			};
 		}
 

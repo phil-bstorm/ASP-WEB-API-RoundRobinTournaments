@@ -18,6 +18,13 @@ namespace RoundRobinTournaments.API.DTOs
 		public required DateOnly birhtDate { get; set; }
 	}
 
+	public class UpdatePasswordDTO
+	{
+		[Required]
+		[MinLength(3)]
+		public required string Password { get; set; }
+	}
+
 	public class UtilisateurListDTO
 	{
 		public required int Id { get; set; }

@@ -51,7 +51,7 @@ namespace RoundRobinTournaments.API.Controllers
 
 		[HttpPut(Name = "Update")]
 		[Authorize]
-		[ProducesResponseType(StatusCodes.Status200OK)]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
 		[ProducesResponseType(StatusCodes.Status400BadRequest)]
 		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
 		[ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -68,9 +68,73 @@ namespace RoundRobinTournaments.API.Controllers
 				updateUser.Id = requestUserId;
 
 				_utilisateurService.Update(updateUser);
-				return Ok();
+				return NoContent();
 			}
 			return Unauthorized();
+		}
+
+		[HttpPut("{id}", Name = "Update other user")]
+		[Authorize(Roles = nameof(UtilisateurRole.Admin))]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+		public ActionResult UpdateUtilisateur([FromRoute] int id, [FromBody] UtilisateurUpdateDTO updateForm)
+		{
+			if (updateForm is null || !ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			Utilisateur updateUser = updateForm.ToUtilisateur();
+			updateUser.Id = id;
+
+			_utilisateurService.Update(updateUser);
+			return NoContent();
+		}
+
+		[HttpPatch("password", Name = "Update password")]
+		[Authorize]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+		public ActionResult UpdatePassword([FromBody] UpdatePasswordDTO updatePasswordForm)
+		{
+			if (int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int requestUserId))
+			{
+				if (updatePasswordForm is null || !ModelState.IsValid)
+				{
+					return BadRequest();
+				}
+
+				Utilisateur updateUser = _utilisateurService.GetById(requestUserId);
+				updateUser.Password = updatePasswordForm.Password;
+
+				_utilisateurService.Update(updateUser);
+				return NoContent();
+			}
+			return Unauthorized();
+		}
+
+		[HttpPatch("password/{id}", Name = "Update password of other user")]
+		[Authorize(Roles = nameof(UtilisateurRole.Admin))]
+		[ProducesResponseType(StatusCodes.Status204NoContent)]
+		[ProducesResponseType(StatusCodes.Status400BadRequest)]
+		[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+		[ProducesResponseType(StatusCodes.Status500InternalServerError)]
+		public ActionResult UpdatePasswordUtilisateur([FromRoute] int id, [FromBody] UpdatePasswordDTO updatePasswordForm)
+		{
+			if (updatePasswordForm is null || !ModelState.IsValid)
+			{
+				return BadRequest();
+			}
+
+			Utilisateur updateUser = _utilisateurService.GetById(id);
+			updateUser.Password = updatePasswordForm.Password;
+
+			_utilisateurService.Update(updateUser);
+			return NoContent();
 		}
 	}
 }

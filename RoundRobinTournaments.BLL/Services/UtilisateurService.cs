@@ -117,7 +117,11 @@ namespace RoundRobinTournaments.BLL.Services
 			utilisateur.Elo = entity.Elo;
 			utilisateur.BirhDate = entity.BirhDate;
 
-			return _utilisateurRepository.Update(entity);
+			if (entity.AvatarUrl is not null) {
+				utilisateur.AvatarUrl = entity.AvatarUrl;
+			}
+
+			return _utilisateurRepository.Update(utilisateur);
 		}
 
 		public Utilisateur Login(string username, string password)
@@ -130,6 +134,19 @@ namespace RoundRobinTournaments.BLL.Services
 			}
 
 			return utilisateur;
+		}
+
+		public bool UpdatePassword(int id, string newPassowrd) {
+			Utilisateur? utilisateur = _utilisateurRepository.GetById(id);
+			if (utilisateur == null)
+			{
+				throw new NotFoundException();
+			}
+
+			utilisateur.Password = Argon2.Hash(newPassowrd);
+
+			_utilisateurRepository.Update(utilisateur);
+			return true;
 		}
 	}
 }
