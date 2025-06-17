@@ -36,6 +36,8 @@ namespace RoundRobinTournaments.DAL.Database.Configurations
 				.HasColumnName("role")
 				.IsRequired()
 				.HasConversion<string>(); // Assuming UtilisateurRole is an enum
+			builder.Property(u => u.AvatarUrl)
+				.HasColumnName("avatar_url");
 
 			// CONSTRAINTS
 			builder.HasKey(u => u.Id);

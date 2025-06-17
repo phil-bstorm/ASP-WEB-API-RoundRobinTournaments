@@ -11,6 +11,7 @@ namespace RoundRobinTournaments.Domain.Models
 		public int Elo { get; set; } = 1200; // Default Elo rating
 		public DateOnly BirhDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 		public UtilisateurRole Role { get; set; } = UtilisateurRole.Player; // Default role
+		public string? AvatarUrl { get; set; }
 
 		// Navigation properties
 		public List<InscriptionPlayerTournament> InscriptionPlayerTournaments { get; set; } = [];

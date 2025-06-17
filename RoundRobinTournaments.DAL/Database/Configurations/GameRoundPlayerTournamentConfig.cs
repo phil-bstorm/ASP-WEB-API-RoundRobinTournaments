@@ -15,6 +15,14 @@ namespace RoundRobinTournaments.DAL.Database.Configurations
 				.HasColumnName("id")
 				.ValueGeneratedOnAdd();
 
+			builder.Property(x => x.BlackElo)
+				.HasColumnName("black_elo")
+				.IsRequired();
+
+			builder.Property(x => x.WhiteElo)
+				.HasColumnName("white_elo")
+				.IsRequired();
+
 			builder.Property(x => x.Round)
 				.HasColumnName("round")
 				.IsRequired();

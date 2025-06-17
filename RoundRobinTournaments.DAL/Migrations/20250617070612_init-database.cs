@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace RoundRobinTournaments.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class initdatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -97,7 +97,9 @@ namespace RoundRobinTournaments.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     tournament_id = table.Column<int>(type: "int", nullable: false),
                     white_id = table.Column<int>(type: "int", nullable: false),
+                    white_elo = table.Column<int>(type: "int", nullable: false),
                     black_id = table.Column<int>(type: "int", nullable: false),
+                    black_elo = table.Column<int>(type: "int", nullable: false),
                     round = table.Column<int>(type: "int", nullable: false),
                     result = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

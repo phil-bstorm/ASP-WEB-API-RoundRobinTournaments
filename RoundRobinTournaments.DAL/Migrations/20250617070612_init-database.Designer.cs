@@ -12,8 +12,8 @@ using RoundRobinTournaments.DAL.Database;
 namespace RoundRobinTournaments.DAL.Migrations
 {
     [DbContext(typeof(TournamentContext))]
-    [Migration("20250612132322_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250617070612_init-database")]
+    partial class initdatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,10 @@ namespace RoundRobinTournaments.DAL.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("BlackElo")
+                        .HasColumnType("int")
+                        .HasColumnName("black_elo");
+
                     b.Property<string>("Result")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("result");
@@ -84,6 +88,10 @@ namespace RoundRobinTournaments.DAL.Migrations
                     b.Property<int>("Round")
                         .HasColumnType("int")
                         .HasColumnName("round");
+
+                    b.Property<int>("WhiteElo")
+                        .HasColumnType("int")
+                        .HasColumnName("white_elo");
 
                     b.Property<int>("black_id")
                         .HasColumnType("int");
