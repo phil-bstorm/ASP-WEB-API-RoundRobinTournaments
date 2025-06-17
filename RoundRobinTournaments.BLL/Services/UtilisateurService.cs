@@ -84,7 +84,7 @@ namespace RoundRobinTournaments.BLL.Services
 			}
 			return utilisateur;
 		}
-
+		
 		public Utilisateur Update(Utilisateur entity)
 		{
 			Utilisateur? utilisateur = _utilisateurRepository.GetById(entity.Id);
@@ -92,6 +92,30 @@ namespace RoundRobinTournaments.BLL.Services
 			{
 				throw new NotFoundException();
 			}
+
+			// place value in the objet from the repository
+			if (utilisateur.Email != entity.Email) {
+				// the user is trying to change his email
+				Utilisateur? existingUser = _utilisateurRepository.GetByEmail(entity.Email);
+				if (existingUser is not null)
+				{
+					throw new EmailAlreadyUsedException();
+				}
+				utilisateur.Email = entity.Email;
+			}
+
+			if (utilisateur.Username != entity.Username) {
+				// the user is trying to change his Username
+				Utilisateur? existingUser = _utilisateurRepository.GetByUsername(entity.Username);
+				if (existingUser is not null)
+				{
+					throw new UsernameAlreadyUsedException();
+				}
+				utilisateur.Username = entity.Username;
+			}
+
+			utilisateur.Elo = entity.Elo;
+			utilisateur.BirhDate = entity.BirhDate;
 
 			return _utilisateurRepository.Update(entity);
 		}

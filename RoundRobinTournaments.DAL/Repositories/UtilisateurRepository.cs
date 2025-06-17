@@ -72,9 +72,9 @@ namespace RoundRobinTournaments.DAL.Repositories
 
 		public Utilisateur Update(Utilisateur entity)
 		{
-			Utilisateur utilisateur = _context.Utilisateurs.Update(entity).Entity;
+			//_context.Utilisateurs.Update(entity); pas nécessaire car le "tracking" est activé
 			_context.SaveChanges();
-			return utilisateur;
+			return entity;
 		}
 	}
 }
