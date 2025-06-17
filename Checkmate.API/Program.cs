@@ -72,6 +72,7 @@ builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
 
 #region API Services
 builder.Services.AddScoped<AuthService>();
+builder.Services.AddHttpClient<IGoogleCaptchaService, GoogleCaptchaService>();
 #endregion
 
 #region JWT Bearer Authentication
@@ -103,6 +104,22 @@ builder
 
 #endregion
 
+#region CORS
+
+builder.Services.AddCors(service =>
+{
+	service.AddPolicy("FFA", policy =>
+	{
+		policy.AllowAnyOrigin();
+		policy.AllowAnyMethod();
+		policy.AllowAnyHeader();
+	});
+
+	// TODO : Add more CORS policies for production
+});
+
+#endregion
+
 #region Rate Limiting
 builder.Services.AddMemoryCache();
 builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
@@ -123,6 +140,8 @@ if (app.Environment.IsDevelopment())
 app.UseIpRateLimiting();
 
 app.UseHttpsRedirection();
+
+app.UseCors("FFA");
 
 app.UseStaticFiles();
 
